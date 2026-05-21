@@ -1,0 +1,55 @@
+// implementing using the Trie
+
+struct Node{
+    Node* lists[26];
+    bool flag = false;
+
+    Node(){
+        for(int i=0;i<26;i++) lists[i] = nullptr;
+    }
+
+    bool contains(char ch){
+        return lists[ch-'a'] != nullptr;
+    }
+
+    void put(char ch, Node* newnode){
+        lists[ch-'a'] = newnode;
+    }
+
+    Node* get(char ch){
+        return lists[ch-'a'];
+    }
+
+    void setend(){
+        flag = true;
+    }
+
+    
+    
+
+};
+
+
+int countDistinctSubstrings(string &s)
+{
+    int cnt = 0;
+
+    Node* root = new Node();
+
+    for(int i=0;i<s.length();i++){
+        Node* node = root;
+
+        for(int j=i;j<s.length();j++){
+            if(!(node->contains(s[j]))){
+                cnt++;
+                node->put(s[j], new Node());
+            }
+
+            node = node->get(s[j]);
+        }
+
+        node->setend();
+    }
+
+    return cnt+1;
+}
