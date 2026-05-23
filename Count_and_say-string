@@ -1,0 +1,52 @@
+class Solution {
+public:
+    string countAndSay(int n) {
+        // do this thing for the n times, starting from 1 to n
+
+        string ans = "1";
+
+        n=n-1;
+
+        int num = n;
+
+        while(n > 0){
+            string temp = "";
+            char ch = ans[0];
+            int cnt = 1;
+
+            if(n==num){
+                ans = "11";
+            }
+
+            else{
+               
+               for(int i=1;i<ans.length();i++){
+                
+
+                if(ans[i]==ch) cnt++;
+                else{
+                    temp += to_string(cnt);
+                    temp += to_string(ch-'0');
+                     ch = ans[i];
+                      cnt = 1;
+                } 
+
+                 }
+
+                    temp += to_string(cnt);
+                    temp += to_string(ch-'0');
+                             
+           
+
+               ans = temp;
+
+            }
+
+             
+            n--;
+
+        }
+
+        return ans;
+    }
+};
