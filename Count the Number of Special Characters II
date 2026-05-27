@@ -1,0 +1,38 @@
+class Solution {
+public:
+    int numberOfSpecialChars(string word) {
+        map<int,pair<int,int>>mpp,mpp2;
+
+        for(int i=0;i<word.length();i++){
+            // store the minimum for small
+            // store the largest for capital char      
+           if(word[i]>='A' && word[i]<='Z'){
+
+                    if(mpp.find(word[i]-'A') == mpp.end())
+                    mpp[word[i]-'A'] = make_pair(1,i);
+
+               }
+
+               else if(word[i]>='a' && word[i]<='z'){
+                
+                   
+                    mpp2[word[i]-'a'] = make_pair(1,i); 
+
+               }     
+        }
+
+        int cnt = 0;
+
+        for(int i=0;i<26;i++){
+            if(mpp.count(i) && mpp2.count(i)){
+                if(mpp[i].second > mpp2[i].second) cnt++;
+            }
+        }
+
+
+
+        
+
+      return cnt;
+    }
+};
